@@ -392,4 +392,190 @@ body {
   flex: 1;
 }
 
+/* 子役ボタンの中の色 */
+.counter-box[data-key="bell"] {
+  background-color: #ffe45c; /* 黄色 */
+  color: #000;
+}
 
+.counter-box[data-key="cherry"] {
+  background-color: #ff4b4b; /* 赤 */
+  color: #000;
+}
+
+.counter-box[data-key="orangeP"] {
+  background-color: #ffb86c; /* 薄オレンジ */
+  color: #000;
+}
+
+.counter-box[data-key="orangeS"] {
+  background-color: #ff8c00; /* 濃いオレンジ */
+  color: #000;
+}
+
+.counter-box[data-key="kakutei"] {
+  background-color: #b36bff; /* 紫 */
+  color: #000;
+}
+
+/* 丸ボタン化 */
+.counter-box {
+  border-radius: 20px;
+}
+/* 画面全体フラッシュ */
+body.screen-flash {
+  animation: screenFlashAnim 0.15s ease-out;
+}
+
+@keyframes screenFlashAnim {
+  0%   { box-shadow: 0 0 40px var(--flash-color) inset; }
+  100% { box-shadow: 0 0 0px transparent inset; }
+}
+/* 画面全体フラッシュ（白＋色の最強版） */
+body.screen-flash {
+  animation: screenFlashAnim 0.15s ease-out;
+}
+
+@keyframes screenFlashAnim {
+  0% {
+    box-shadow: 0 0 150px var(--flash-color) inset;
+    background-color: rgba(255,255,255,0.65); /* 白フラッシュ */
+  }
+  100% {
+    box-shadow: 0 0 0px transparent inset;
+    background-color: transparent;
+  }
+}
+/* 画面全体フラッシュ（色だけで強烈に光る版） */
+body.screen-flash {
+  animation: screenFlashAnim 0.18s ease-out;
+}
+
+@keyframes screenFlashAnim {
+  0% {
+    background-color: var(--flash-color);   /* 役の色で画面を染める */
+    box-shadow: 0 0 200px var(--flash-color) inset; /* ふちも強烈に光る */
+    opacity: 0.85;  /* 画面全体の発光強度 */
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0px transparent inset;
+    opacity: 1;
+  }
+}
+.counter-box .count-label {
+  font-weight: bold;
+}
+.reset-btn {
+  background-color: #ff66cc;   /* ピンク */
+  color: #fff;                 /* 白文字 */
+  font-weight: bold;           /* 太字で見やすく */
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;         /* 角丸でかわいく */
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: 0.15s;
+}
+
+.reset-btn:active {
+  transform: scale(0.95);
+  background-color: #ff4dbb;   /* 押した時ちょい濃く */
+}
+.bonus-save-btn {
+  background-color: #ffd93b;   /* 明るい黄色 */
+  color: #000;                 /* 黒文字で読みやすい */
+  font-weight: bold;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: 0.15s;
+}
+
+.bonus-save-btn:active {
+  transform: scale(0.95);
+  background-color: #ffcc00;   /* 押した時ちょい濃い黄色 */
+}
+.hint-save-btn {
+  background-color: #ffd93b;   /* 明るい黄色（ボーナス登録と同じ） */
+  color: #000;                 /* 黒文字で読みやすい */
+  font-weight: bold;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: 0.15s;
+}
+
+.hint-save-btn:active {
+  transform: scale(0.95);
+  background-color: #ffcc00;   /* 押した時ちょい濃い黄色 */
+}
+
+.hint-clear-btn {
+  background-color: #ff4d4d;   /* 強めの赤 */
+  color: #fff;                 /* 白文字で警告感 */
+  font-weight: bold;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: 0.15s;
+}
+
+.hint-clear-btn:active {
+  transform: scale(0.95);
+  background-color: #e60000;   /* 押した時さらに濃い赤 */
+}
+.reset-btn {
+  background-color: #ff4d4d;   /* 強めの赤 */
+  color: #000;                 /* 黒文字（読みやすい） */
+  font-weight: bold;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: 0.15s;
+}
+
+.reset-btn:active {
+  transform: scale(0.95);
+  background-color: #e60000;   /* 押した時さらに濃い赤 */
+}
+/* 太字にしたいボタンたち */
+.mode-btn,
+.accordion-btn,
+.judge-button {
+  font-weight: bold;
+}
+.judge-button {
+  background-color: #ffd93b;   /* 明るい黄色（統一色） */
+  color: #000;                 /* 黒文字で読みやすい */
+  font-weight: bold;           /* 太字で強調 */
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: 0.15s;
+}
+
+.judge-button:active {
+  transform: scale(0.95);
+  background-color: #ffcc00;   /* 押した時ちょい濃い黄色 */
+}
+.all-clear-btn {
+  background-color: #ff4d4d;   /* 強めの赤 */
+  color: #fff;                 /* 白文字 */
+  font-weight: bold;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+  transition: 0.15s;
+  margin-top: 10px;
+}
+
+.all-clear-btn:active {
+  transform: scale(0.95);
+  background-color: #e60000;   /* 押した時さらに濃い赤 */
+}

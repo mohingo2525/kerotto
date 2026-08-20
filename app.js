@@ -68,30 +68,48 @@ function renderRates() {
 }
 
 // 初期化（枠全押し＋派手フラッシュ対応）
+const FLASH_COLORS = {
+  bell: "#ffe45c",     // 黄色
+  cherry: "#ff4b4b",   // 赤
+  orangeP: "#ffb86c",  // 薄オレンジ
+  orangeS: "#ff8c00",  // 濃いオレンジ
+  kakutei: "#b36bff"   // 紫
+};
+
 function setupCounters() {
   loadState();
   render();
 
   KEYS.forEach(key => {
-    const box = document.querySelector(`.counter-box[data-key="${key}"]`);
+  const box = document.querySelector(`.counter-box[data-key="${key}"]`);
 
-    // 枠全体クリック
-    box.addEventListener("click", () => {
-      if (counterMode === "plus") {
-        state[key] += 1;
-      } else {
-        state[key] = Math.max(0, state[key] - 1);
-      }
-      saveState();
-      render();
+  box.addEventListener("click", () => {
+    if (counterMode === "plus") {
+      state[key] += 1;
+    } else {
+      state[key] = Math.max(0, state[key] - 1);
+    }
+    saveState();
+    render();
 
-      try { navigator.vibrate(10); } catch (e) {}
+    try { navigator.vibrate([150]); } catch (e) {}
 
-      // 派手フラッシュ
-      box.classList.add("flash");
-      setTimeout(() => box.classList.remove("flash"), 250);
-    });
-  });
+    // 枠の派手フラッシュ
+    box.classList.add("flash");
+    setTimeout(() => box.classList.remove("flash"), 250);
+
+    // 画面全体フラッシュ
+    const flashColor = FLASH_COLORS[key];
+    document.body.style.setProperty("--flash-color", flashColor);
+    document.body.classList.add("screen-flash");
+    setTimeout(() => {
+      document.body.classList.remove("screen-flash");
+    }, 150);
+  });   // ← addEventListener の閉じ
+});     // ← ★これが抜けてた（forEach の閉じ）
+
+
+
 
   document.getElementById("reset-btn").addEventListener("click", () => {
     if (!confirm("全消去しますか？")) return;
@@ -855,3 +873,41 @@ function recalcJudge() {
    ここまでが完全版。
    UI側では calcSettingScores(state) を呼べばOK。
 ============================================================ */
+document.getElementById("all-clear-btn").addEventListener("click", () => {
+
+  const ok = confirm("本当に全データを削除しますか？\n（ゲーム数・小役・ボーナス・示唆履歴すべて）");
+
+  if (!ok) return;  // キャンセルなら何もしない
+
+  // localStorage 全削除
+  localStorage.clear();
+
+  // 小役カウンター初期化
+  state = {
+    bell: 0,
+    cherry: 0,
+    orangeP: 0,
+    orangeS: 0,
+    kakutei: 0
+  };
+
+  // ボーナス履歴初期化
+  bonusHistory = [];
+  document.getElementById("bonus-history").innerHTML = "";
+  document.getElementById("bonus-count").textContent = 0;
+
+  // 示唆履歴初期化
+  hintHistory = [];
+  document.getElementById("hint-history").innerHTML = "";
+
+  // ゲーム数初期化
+  document.getElementById("start-games").value = "";
+  document.getElementById("total-games").value = "";
+  document.getElementById("my-games").textContent = 0;
+
+  // 再描画
+  saveState();
+  render();
+
+  alert("全データを削除しました");
+});
