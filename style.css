@@ -1,0 +1,395 @@
+/* ============================
+   全体レイアウト
+============================ */
+body {
+  background: #000;
+  color: #fff;
+  font-family: "Meiryo", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  text-align: center;
+  padding: 20px 0;
+  background: #111;
+  border-bottom: 2px solid #00ff66;
+}
+
+.main {
+  width: 95%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* ============================
+   プレイ数＋ボーナス確率（左右カード統一）
+============================ */
+.play-bonus-grid {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  align-items: stretch; /* 高さを揃える */
+}
+
+.play-left,
+.bonus-right {
+  flex: 1;
+  background: #111;
+  border: 2px solid #00ff66;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* タイトル統一 */
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  border-left: 5px solid #00ff66;
+  padding-left: 10px;
+  margin-bottom: 6px;
+}
+
+/* ============================
+   プレイ数入力（ボーナス確率と完全統一）
+============================ */
+.play-input-box {
+  margin-bottom: 8px;
+}
+
+.play-input-box label {
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0.9;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ← ゲーム数入力欄の右ズレ完全解消 */
+.play-input-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #00ff66;
+  background: #000;
+  color: #fff;
+  font-size: 18px;
+}
+
+.play-save-btn {
+  width: 100%;
+  padding: 12px;
+  background: #00ff66;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.play-result {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #00ff99;
+  text-align: center;
+}
+
+.play-result span {
+  font-size: 26px;
+  font-weight: bold;
+  color: #00ffaa;
+}
+
+/* ============================
+   ボーナス確率（視認性アップ）
+============================ */
+.bonus-card {
+  background: #000;
+  border: 1px solid #00ff66;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bonus-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.bonus-card-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.bonus-card-value span:first-child {
+  font-size: 22px;
+  font-weight: bold;
+  color: #00ff99;
+}
+
+.bonus-count {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ============================
+   小役カウンター（枠全押し＋派手フラッシュ）
+============================ */
+.counter-area {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.counter-box {
+  flex: 1;
+  background: #111;
+  border: 2px solid #00ff66;
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.counter-box .btn {
+  pointer-events: none;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 22px;
+  background: #00ff66;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.count-label {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.count-value {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 6px 0;
+}
+
+.count-rate {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 6px;
+}
+
+/* 派手フラッシュ */
+.flash {
+  animation: bigFlash 0.25s ease-out;
+}
+
+@keyframes bigFlash {
+  0% {
+    box-shadow: 0 0 0px 0px #00ff66;
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 25px 10px #00ff66, 0 0 40px 20px #ffdd00;
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0px 0px #00ff66;
+    transform: scale(1);
+  }
+}
+
+/* ============================
+   モード＋リセット
+============================ */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mode-btn,
+.reset-btn {
+  flex: 1;
+  padding: 10px;
+  background: #00ff66;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* ============================
+   ボーナス登録
+============================ */
+.bonus-area {
+  background: #111;
+  border: 2px solid #00ff66;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.bonus-select {
+  margin-bottom: 10px;
+}
+
+.bonus-select select {
+  width: 100%;
+  padding: 8px;
+  background: #111;
+  border: 2px solid #00ff66;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.bonus-save-btn {
+  width: 100%;
+  padding: 10px;
+  background: #00ff66;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* ============================
+   アコーディオン
+============================ */
+.accordion-btn {
+  width: 100%;
+  padding: 10px;
+  background: #00ff66;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.accordion-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.accordion-content.open {
+  display: block;
+}
+
+.bonus-history {
+  background: #222;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.bonus-item {
+  margin-bottom: 8px;
+}
+
+/* ============================
+   示唆入力
+============================ */
+.hint-area {
+  background: #111;
+  border: 2px solid #00ff66;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.hint-card {
+  margin-bottom: 12px;
+}
+
+.hint-select {
+  width: 100%;
+  padding: 8px;
+  background: #111;
+  border: 2px solid #00ff66;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.hint-btn {
+  width: 100%;
+  padding: 10px;
+  background: #00ff66;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.hint-save-btn,
+.hint-clear-btn {
+  width: 100%;
+  padding: 10px;
+  background: #00ff66;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* 示唆履歴アコーディオン */
+#hint-accordion-content {
+  display: none;
+  margin-top: 10px;
+}
+
+#hint-accordion-content.open {
+  display: block;
+}
+
+.hint-history {
+  background: #222;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.hint-item {
+  margin-bottom: 8px;
+}
+
+/* ============================
+   設定判別（カード風）
+============================ */
+.judge-area {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #00ff66;
+}
+
+.judge-card {
+  background: #222;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #00ff66;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* ============================
+   3つ横並び
+============================ */
+.triple-wrapper {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.triple-wrapper > section {
+  flex: 1;
+}
+
+

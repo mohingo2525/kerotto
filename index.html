@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐸 ケロット5 設定判別</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <h1>🐸 ケロット5 設定判別</h1>
+</header>
+
+<main class="main">
+
+  <!-- プレイ数＋ボーナス確率 -->
+  <section class="play-bonus-grid">
+
+    <div class="play-left">
+      <h2 class="section-title">🎮 プレイ数入力</h2>
+
+      <div class="play-input-box">
+        <label>開始ゲーム数</label>
+        <input id="start-games" type="number">
+      </div>
+
+      <div class="play-input-box">
+        <label>現在の総ゲーム数</label>
+        <input id="total-games" type="number">
+      </div>
+
+      <button id="play-save-btn" class="play-save-btn">プレイ数を更新</button>
+
+      <div class="play-result">
+        実績ゲーム数：<span id="my-games">0</span> G
+      </div>
+    </div>
+
+    <div class="bonus-right">
+      <h2 class="section-title">🎴 ボーナス確率</h2>
+
+      <div class="bonus-card">
+        <div class="bonus-card-title">SBB確率</div>
+        <div class="bonus-card-value">
+          <span id="rate-sbb">-</span>
+          <span id="count-sbb">0回</span>
+        </div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-card-title">BB確率</div>
+        <div class="bonus-card-value">
+          <span id="rate-bb">-</span>
+          <span id="count-bb">0回</span>
+        </div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-card-title">REG確率</div>
+        <div class="bonus-card-value">
+          <span id="rate-reg">-</span>
+          <span id="count-reg">0回</span>
+        </div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-card-title">BIG合算</div>
+        <div class="bonus-card-value">
+          <span id="rate-big">-</span>
+          <span id="count-big">0回</span>
+        </div>
+      </div>
+
+      <div class="bonus-card">
+        <div class="bonus-card-title">ボーナス合算</div>
+        <div class="bonus-card-value">
+          <span id="rate-bonus">-</span>
+          <span id="count-bonus">0回</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- 小役カウンター -->
+  <section class="counter-area">
+
+    <div class="counter-box" data-key="bell">
+      <button class="btn">🟡</button>
+      <div class="count-label">ベル</div>
+      <div class="count-value" id="bell-count">0</div>
+      <div class="count-rate" id="bell-rate">-</div>
+    </div>
+
+    <div class="counter-box" data-key="cherry">
+      <button class="btn">🔴</button>
+      <div class="count-label">チェリー</div>
+      <div class="count-value" id="cherry-count">0</div>
+      <div class="count-rate" id="cherry-rate">-</div>
+    </div>
+
+    <div class="counter-box" data-key="orangeP">
+      <button class="btn">🟠</button>
+      <div class="count-label">平行オレンジ</div>
+      <div class="count-value" id="orangeP-count">0</div>
+      <div class="count-rate" id="orangeP-rate">-</div>
+    </div>
+
+    <div class="counter-box" data-key="orangeS">
+      <button class="btn">🟤</button>
+      <div class="count-label">斜めオレンジ</div>
+      <div class="count-value" id="orangeS-count">0</div>
+      <div class="count-rate" id="orangeS-rate">-</div>
+    </div>
+
+    <div class="counter-box" data-key="kakutei">
+      <button class="btn">🟣</button>
+      <div class="count-label">確定役</div>
+      <div class="count-value" id="kakutei-count">0</div>
+      <div class="count-rate" id="kakutei-rate">-</div>
+    </div>
+
+  </section>
+
+  <section class="controls">
+    <button id="counter-mode-btn" class="mode-btn">モード：＋</button>
+    <button id="reset-btn" class="reset-btn">リセット</button>
+  </section>
+
+  <!-- 3つ横並び -->
+  <div class="triple-wrapper">
+
+    <!-- ボーナス登録 -->
+    <section class="bonus-area">
+      <h2 class="section-title">🎰 ボーナス登録</h2>
+
+      <div class="bonus-select">
+        <label>ボーナス種類</label>
+        <select id="bonus-type">
+          <option value="">選択してください</option>
+          <option value="赤SBB">赤SBB</option>
+          <option value="白SBB">白SBB</option>
+          <option value="赤BB">赤BB</option>
+          <option value="白BB">白BB</option>
+          <option value="赤RB">赤RB</option>
+          <option value="白RB">白RB</option>
+          <option value="フタバ赤">フタバ赤</option>
+          <option value="フタバ白">フタバ白</option>
+        </select>
+      </div>
+
+      <div class="bonus-select">
+        <label>当選契機</label>
+        <select id="bonus-trigger">
+          <option value="">選択してください</option>
+          <option value="単独">単独</option>
+          <option value="リプレイ">リプレイ</option>
+          <option value="ベル">ベル</option>
+          <option value="チェリー">チェリー</option>
+          <option value="平行オレンジ">平行オレンジ</option>
+          <option value="斜めオレンジ">斜めオレンジ</option>
+          <option value="確定役">確定役</option>
+        </select>
+      </div>
+
+      <button id="bonus-save-btn" class="bonus-save-btn">記録する</button>
+
+      <div class="accordion">
+        <button id="bonus-accordion-btn" class="accordion-btn">
+          📜 ボーナス履歴（<span id="bonus-count">0</span>件） ▼
+        </button>
+
+        <div id="bonus-accordion-content" class="accordion-content">
+          <div id="bonus-history" class="bonus-history"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 示唆入力 -->
+    <section class="hint-area">
+  <h2 class="section-title">✨ 示唆入力（メモのみ・設定判別に含めない）</h2>
+
+      <div class="hint-card">
+        <label>🖼 BIG終了画面</label>
+        <select id="big-end-select" class="hint-select">
+          <option value="">なし</option>
+          <option value="青1">青①</option>
+          <option value="青2">青②</option>
+          <option value="赤">赤</option>
+          <option value="銀">銀</option>
+          <option value="金1">金①</option>
+          <option value="金2">金②</option>
+        </select>
+      </div>
+
+      <div class="hint-card">
+        <label>🎨 REG中示唆</label>
+        <select id="reg-hint-select" class="hint-select">
+          <option value="">なし</option>
+          <option value="赤">赤</option>
+          <option value="銀">銀</option>
+          <option value="金1">金①</option>
+          <option value="金2">金②</option>
+        </select>
+      </div>
+
+      <div class="hint-card">
+        <label>🏆 トロフィー</label>
+        <select id="trophy-select" class="hint-select">
+          <option value="">なし</option>
+          <option value="銅">銅</option>
+          <option value="銀">銀</option>
+          <option value="金">金</option>
+          <option value="ケロット柄">ケロット柄</option>
+          <option value="虹">虹</option>
+        </select>
+      </div>
+
+      <div class="hint-card">
+        <label>🔥 ロングフリーズ</label>
+        <button id="freeze-btn" class="hint-btn">フリーズ発生</button>
+      </div>
+
+      <button id="hint-save-btn" class="hint-save-btn">示唆を保存する</button>
+      <button id="hint-clear-btn" class="hint-clear-btn">示唆履歴を全削除</button>
+
+      <div class="accordion">
+        <button id="hint-accordion-btn" class="accordion-btn">
+          📜 示唆履歴 ▼
+        </button>
+
+        <div id="hint-accordion-content" class="accordion-content">
+          <div id="hint-history" class="hint-history"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 設定判別 -->
+<section class="judge-area">
+  <h2 class="section-title">🎯 設定判別</h2>
+
+  <div id="judge-cards"></div>
+
+  <!-- ★ ここに判別ボタンを追加する ★ -->
+  <button id="judge-btn" class="judge-button">設定判別する</button>
+
+</section>
+
+
+  </div>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
+
